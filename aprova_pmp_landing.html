@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprova PMP - Mentoria para Programas Internacionais</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><circle cx="200" cy="200" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="800" cy="300" r="3" fill="rgba(255,255,255,0.15)"/><circle cx="400" cy="600" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="900" cy="700" r="4" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            100% { transform: translateY(-20px) rotate(360deg); }
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #f0f8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .slogan {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(238, 90, 36, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(238, 90, 36, 0.4);
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #2c3e50;
+            font-weight: 700;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #7f8c8d;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* About Section */
+        .about {
+            background: #f8f9fa;
+        }
+
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .module-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .module-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .module-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        /* Community Section */
+        .community {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .testimonial {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
+        /* Includes Section */
+        .includes {
+            background: #f8f9fa;
+        }
+
+        .includes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .include-item {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+
+        .include-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .include-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        /* Target Audience */
+        .target-audience ul {
+            list-style: none;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .target-audience li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .target-audience li::before {
+            content: '✔️';
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+
+        /* Comparison Table */
+        .comparison {
+            background: #f8f9fa;
+        }
+
+        .comparison-table {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table th {
+            background: #667eea;
+            color: white;
+            font-weight: 600;
+        }
+
+        .comparison-table .highlight {
+            background: #e8f4f8;
+            font-weight: 600;
+        }
+
+        /* Pricing */
+        .pricing {
+            text-align: center;
+        }
+
+        .price-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 25px;
+            max-width: 400px;
+            margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
+        }
+
+        .price {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .price-subtitle {
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        /* FAQ */
+        .faq {
+            background: #f8f9fa;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .faq-question {
+            background: #667eea;
+            color: white;
+            padding: 20px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .faq-answer {
+            padding: 20px;
+            display: none;
+        }
+
+        .faq-answer.active {
+            display: block;
+        }
+
+        /* Creator Section */
+        .creator {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .creator-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .creator-image {
+            text-align: center;
+        }
+
+        .creator-photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .creator-info h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+
+        .achievement {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .hobbies {
+            margin-top: 20px;
+        }
+
+        .hobbies span {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .slogan {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .creator-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 15px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Aprova PMP</h1>
+                <p class="slogan">Sua porta de entrada para programas internacionais de prestígio</p>
+                <a href="#pricing" class="cta-button">Quero me inscrever</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about">
+        <div class="container">
+            <h2 class="section-title">O que é a Aprova PMP?</h2>
+            <p class="section-subtitle">
+                Uma mentoria completa e prática que te prepara para ser aprovado nos melhores programas internacionais, 
+                incluindo summer programs de universidades como Harvard, Princeton e muito mais.
+            </p>
+            
+            <div class="modules-grid">
+                <div class="module-card">
+                    <h3>📝 Preparação de Application</h3>
+                    <p>Aprenda a criar applications impecáveis que se destacam entre milhares de candidatos.</p>
+                </div>
+                <div class="module-card">
+                    <h3>✍️ Essays Vencedores</h3>
+                    <p>Técnicas para escrever essays autênticos e impactantes que impressionam admissões.</p>
+                </div>
+                <div class="module-card">
+                    <h3>🎯 Strategy & Positioning</h3>
+                    <p>Como se posicionar estrategicamente e escolher os programas certos para seu perfil.</p>
+                </div>
+                <div class="module-card">
+                    <h3>💰 Financial Aid & Scholarships</h3>
+                    <p>Estratégias para conseguir bolsas e auxílio financeiro em programas internacionais.</p>
+                </div>
+                <div class="module-card">
+                    <h3>📞 Interview Prep</h3>
+                    <p>Preparação completa para entrevistas e como causar a melhor impressão.</p>
+                </div>
+                <div class="module-card">
+                    <h3>🌟 Extracurriculars</h3>
+                    <p>Como desenvolver e apresentar suas atividades extracurriculares de forma impactante.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community Section -->
+    <section class="section community">
+        <div class="container">
+            <h2 class="section-title">Comunidade e Networking</h2>
+            <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">
+                Faça parte de uma comunidade exclusiva de jovens ambiciosos que estão conquistando o mundo
+            </p>
+            
+            <div class="testimonials">
+                <div class="testimonial">
+                    <p class="testimonial-text">"A Ana me ajudou a conseguir bolsa total para Harvard Summer School!"</p>
+                    <p class="testimonial-author">- Maria, 16 anos</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"Com a mentoria, fui aprovada em 8 programas internacionais."</p>
+                    <p class="testimonial-author">- João, 17 anos</p>
+                </div>
+                <div class="testimonial">
+                    <p class="testimonial-text">"O networking da comunidade abriu portas que eu nem imaginava."</p>
+                    <p class="testimonial-author">- Letícia, 15 anos</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What's Included -->
+    <section class="section includes">
+        <div class="container">
+            <h2 class="section-title">O que está incluído</h2>
+            <p class="section-subtitle">6 meses de mentoria completa com tudo que você precisa</p>
+            
+            <div class="includes-grid">
+                <div class="include-item">
+                    <div class="include-icon">📋</div>
+                    <h3>Correção Semanal</h3>
+                    <p>Feedback detalhado dos seus materiais toda semana</p>
+                </div>
+                <div class="include-item">
+                    <div class="include-icon">📄</div>
+                    <h3>Templates Exclusivos</h3>
+                    <p>Modelos testados e aprovados para essays e applications</p>
+                </div>
+                <div class="include-item">
+                    <div class="include-icon">🎥</div>
+                    <h3>Encontros Ao Vivo</h3>
+                    <p>Sessions semanais para tirar dúvidas e networking</p>
+                </div>
+                <div class="include-item">
+                    <div class="include-icon">🤝</div>
+                    <h3>Apoio Completo</h3>
+                    <p>Suporte em todas as etapas da sua aplicação</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Target Audience -->
+    <section class="section target-audience">
+        <div class="container">
+            <h2 class="section-title">Para quem é a Aprova PMP?</h2>
+            
+            <ul>
+                <li>Estudantes do ensino médio com sonho internacional</li>
+                <li>Jovens interessados em summer programs no exterior</li>
+                <li>Quem quer estudar nas melhores universidades do mundo</li>
+                <li>Estudantes que buscam bolsas e auxílio financeiro</li>
+                <li>Jovens que querem se destacar em applications</li>
+                <li>Quem precisa de orientação estratégica especializada</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="section comparison">
+        <div class="container">
+            <h2 class="section-title">Por que escolher a Aprova PMP?</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Aspecto</th>
+                        <th>Outros Cursos</th>
+                        <th class="highlight">Aprova PMP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Preço</strong></td>
+                        <td>R$ 2.000 - R$ 10.000</td>
+                        <td class="highlight">R$ 249,90</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mentora</strong></td>
+                        <td>Adultos sem experiência recente</td>
+                        <td class="highlight">Jovem de 15 anos aprovada em +15 programas</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Abordagem</strong></td>
+                        <td>Teórica e distante</td>
+                        <td class="highlight">Prática e próxima da realidade</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Suporte</strong></td>
+                        <td>Limitado</td>
+                        <td class="highlight">6 meses de acompanhamento completo</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Comunidade</strong></td>
+                        <td>Pouco networking</td>
+                        <td class="highlight">Comunidade ativa de jovens ambiciosos</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section pricing">
+        <div class="container">
+            <h2 class="section-title">Investimento</h2>
+            
+            <div class="price-box">
+                <div class="price">R$ 249,90</div>
+                <p class="price-subtitle">6 meses completos de mentoria</p>
+                <a href="#" class="cta-button">Quero me inscrever agora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq">
+        <div class="container">
+            <h2 class="section-title">Perguntas Frequentes</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Como funciona a mentoria?
+                </div>
+                <div class="faq-answer">
+                    A mentoria funciona através de encontros semanais online, correção de materiais, templates exclusivos e suporte contínuo durante 6 meses para te preparar completamente para applications internacionais.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Preciso ter inglês fluente?
+                </div>
+                <div class="faq-answer">
+                    Não é necessário ter inglês fluente no início. Te ajudo a desenvolver suas habilidades durante a mentoria e a superar essa barreira.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Qual a garantia de aprovação?
+                </div>
+                <div class="faq-answer">
+                    Embora não possamos garantir aprovação (isso depende de muitos fatores), nossos alunos têm taxa de aprovação muito alta quando seguem todo o processo da mentoria.
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    Quando começam as próximas turmas?
+                </div>
+                <div class="faq-answer">
+                    Novas turmas começam mensalmente. Após a inscrição, você receberá todas as informações sobre datas e acesso à comunidade.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Creator Section -->
+    <section class="section creator">
+        <div class="container">
+            <h2 class="section-title">Sobre a Ana Luiza</h2>
+            
+            <div class="creator-content">
+                <div class="creator-image">
+                    <div class="creator-photo">👩‍🎓</div>
+                </div>
+                
+                <div class="creator-info">
+                    <h3>Ana Luiza - 15 anos</h3>
+                    
+                    <div class="achievement">
+                        <strong>🎓 Aprovada em +15 programas internacionais</strong>
+                        <p>Incluindo Harvard Summer School com bolsa de 100%</p>
+                    </div>
+                    
+                    <div class="achievement">
+                        <strong>🏆 Premiações de Princeton</strong>
+                        <p>Reconhecimento acadêmico internacional</p>
+                    </div>
+                    
+                    <div class="achievement">
+                        <strong>🥇 +9 medalhas em olimpíadas científicas</strong>
+                        <p>Excelência em competições nacionais e internacionais</p>
+                    </div>
+                    
+                    <div class="achievement">
+                        <strong>🇺🇸 Bolsa 100% para estudar nos EUA em 2025</strong>
+                        <p>Conquistou bolsa integral para educação internacional</p>
+                    </div>
+                    
+                    <div class="hobbies">
+                        <p><strong>Hobbies:</strong></p>
+                        <span>🏃‍♀️ Correr</span>
+                        <span>📅 Se organizar</span>
+                        <span>🎨 Pintar</span>
+                        <span>✍️ Escrever</span>
+                        <span>💭 Debater</span>
+                        <span>🔬 Exatas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            const isActive = answer.classList.contains('active');
+            
+            // Close all FAQ answers
+            document.querySelectorAll('.faq-answer').forEach(ans => {
+                ans.classList.remove('active');
+            });
+            
+            // Open clicked FAQ if it wasn't active
+            if (!isActive) {
+                answer.classList.add('active');
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections
+        document.querySelectorAll('.section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(20px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
